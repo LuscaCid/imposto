@@ -41,6 +41,7 @@ class _CreateMatchPageState extends State<CreateMatchPage> {
     FieldSetType.TOTAL_IMPOSTORS: DEFAULT_TOTAL_IMPOSTORS,
     FieldSetType.TOTAL_ROUNDS: DEFAULT_TOTAL_ROUNDS,
     FieldSetType.ANSWER_DURATION: DEFAULT_ANSWER_DURATION,
+    FieldSetType.VOTING_DURATION: DEFAULT_VOTING_DURATION,
   };
 
   final Map<FieldSetType, String> labels = {
@@ -52,7 +53,7 @@ class _CreateMatchPageState extends State<CreateMatchPage> {
   };
 
   void _handleNumberValues(Action action, FieldSetType field) {
-    final step = field == FieldSetType.ANSWER_DURATION ? 5 : 1;
+    final step = field == FieldSetType.ANSWER_DURATION || field == FieldSetType.VOTING_DURATION ? 5 : 1;
 
     setState(() {
       final result = values[field]! + (action == Action.add ? step : -step);
@@ -201,11 +202,13 @@ class _CreateMatchPageState extends State<CreateMatchPage> {
             numericField(fieldSetType: FieldSetType.MAX_PLAYERS),
             numericField(fieldSetType: FieldSetType.ANSWER_DURATION),
             numericField(fieldSetType: FieldSetType.VOTING_DURATION),
-            ElevatedButton(
+            Container(
+              margin: EdgeInsets.only(bottom: 10),
+              child:   ElevatedButton(
               onPressed: () => _handleCreateMatch(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: ThemeColors.zinc900,
-                elevation: 12,
+                elevation: 2,
                 shadowColor: ThemeColors.primary700,
                 side: BorderSide(color: ThemeColors.zinc800, width: 1.5),
               ),
@@ -224,6 +227,7 @@ class _CreateMatchPageState extends State<CreateMatchPage> {
                 ],
               ),
             ),
+            )
           ],
         ),
       ),

@@ -14,7 +14,6 @@ class Match {
 
   final int maxPlayers;
   final int? minPlayers;
-  final int? playersCount;
 
   final int? currentRound;
   final int totalRounds;
@@ -45,7 +44,6 @@ class Match {
     this.hostPlayerId,
     this.status,
     this.phase,
-    this.playersCount,
     required this.maxPlayers,
     this.minPlayers,
     this.currentRound,
@@ -63,7 +61,6 @@ class Match {
       code: json['code'],
       name: json['name'],
       hostPlayerId: json['hostPlayerId'],
-      playersCount: json['playersCount'],
       status: MatchStatus.values.firstWhere((e) => e.name == json['status']),
       answerDuration: json['answerDuration'],
       votingDuration: json['votingDuration'],
@@ -102,7 +99,6 @@ class Match {
       'hostPlayerId': hostPlayerId,
       'status': status?.name ?? "",
       'phase': phase?.name ?? "",
-      'playersCount': playersCount,
       'maxPlayers': maxPlayers,
       'minPlayers': minPlayers,
       'currentRound': currentRound,

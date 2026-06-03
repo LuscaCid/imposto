@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:imposto/components/profile_icon.dart';
 import 'package:imposto/components/themed_text.dart';
 import 'package:imposto/constants/theme_colors.dart';
+import 'package:imposto/contracts/room.dart';
 import 'package:imposto/contracts/user.dart';
 import 'package:imposto/services/matches_provider.dart';
 import 'package:provider/provider.dart';
@@ -9,14 +10,21 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:imposto/contracts/match.dart';
 
 class HomeMatchCard extends StatelessWidget {
-  final Match match;
+  final Room room;
   final List<User> players;
 
-  const HomeMatchCard({super.key, required this.match, required this.players});
+  const HomeMatchCard({
+    super.key,
+    required this.players,
+    required this.room,
+  });
 
-  Future<void> _handleJoinMatch(BuildContext context, Match match) async {
+  Future<void> _handleJoinMatch(BuildContext context, Room room) async {
     // emitir evento para conexao na partida para que os outros dispositivos saibam que este usuario entrou
-    await Provider.of<MatchProvider>(context).joinMatch(match);
+    await Provider.of<MatchProvider>(
+      context,
+      listen: false,
+    ).joinRoomMatch(room);
     Navigator.pushReplacementNamed(context, '/lobby');
   }
 
@@ -39,7 +47,7 @@ class HomeMatchCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ThemedText(
-                  content: match.name,
+                  content: room.match.name,
                   variant: ThemedTextVariant.primary,
                   fontSize: 18,
                 ),
@@ -47,7 +55,7 @@ class HomeMatchCard extends StatelessWidget {
                   spacing: 2,
                   children: [
                     ThemedText(
-                      content: "${match.currentRound} / ${match.totalRounds}",
+                      content: "${room.match.currentRound} / ${room.match.totalRounds}",
                       variant: ThemedTextVariant.muted,
                       fontSize: 12,
                     ),
@@ -75,7 +83,7 @@ class HomeMatchCard extends StatelessWidget {
                         child: Row(
                           children: [
                             ThemedText(
-                              content: match.phase!.name,
+                              content: room.match.phase!.name,
                               variant: ThemedTextVariant.primary,
                               fontSize: 14,
                             ),
@@ -90,7 +98,7 @@ class HomeMatchCard extends StatelessWidget {
                         children: [
                           ThemedText(
                             content:
-                                "${match.playersCount} / ${match.maxPlayers}",
+                                "${room.players.length} / ${room.match.maxPlayers}",
                             variant: ThemedTextVariant.primary,
                             fontSize: 14,
                           ),
@@ -99,29 +107,36 @@ class HomeMatchCard extends StatelessWidget {
                             height: 35,
                             child: Stack(
                               // this says that will only render the first 5 players in room
-                              children: players.asMap().entries.where((entry) => entry.key < 5).map((entry) {
-                                final index = entry.key;
-                                final player = entry.value;
-                                return Positioned(
-                                  left: index * 20, // controla a sobreposição
-                                  child: ProfileIcon(
-                                    iconId: player.icon,
-                                    isSmall: true,
-                                  ),
-                                );
-                              }).toList(),
+                              children: players
+                                  .asMap()
+                                  .entries
+                                  .where((entry) => entry.key < 5)
+                                  .map((entry) {
+                                    final index = entry.key;
+                                    final player = entry.value;
+                                    return Positioned(
+                                      left:
+                                          index * 20, // controla a sobreposição
+                                      child: ProfileIcon(
+                                        iconId: player.icon,
+                                        isSmall: true,
+                                      ),
+                                    );
+                                  })
+                                  .toList(),
                             ),
                           ),
                         ],
                       ),
                     ),
+                    
                   ],
                 ),
 
                 ElevatedButton(
-                  onPressed: match.playersCount == match.maxPlayers
+                  onPressed: room.players.length == room.match.maxPlayers
                       ? null
-                      : () => _handleJoinMatch(context, match),
+                      : () => _handleJoinMatch(context, room),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.zero,
                     minimumSize: const Size(48, 48),
@@ -129,7 +144,7 @@ class HomeMatchCard extends StatelessWidget {
                   ),
                   child: Center(
                     child: Icon(
-                      match.isLocked! ? Icons.lock : Icons.play_arrow,
+                      room.match.isLocked! ? Icons.lock : Icons.play_arrow,
                       size: 17,
                     ),
                   ),

@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:imposto/contracts/api_get_response.dart';
 import 'package:imposto/contracts/api_save_response.dart';
+import 'package:imposto/contracts/room.dart';
+import 'package:imposto/contracts/user.dart';
 import 'package:imposto/mock/match.dart';
 import 'package:imposto/services/api_service.dart';
 import 'package:imposto/contracts/match.dart';
 
 class MatchProvider extends ChangeNotifier {
   late Match? match;
+  late List<User> matchPlayers;
+  late Room room;
 
-  Future<void> joinMatch(Match joinedMatch) async {
+  Future<void> joinRoomMatch(Room joinedRoomMatch) async {
     // TODO: enviar evento de entrar na partida aos demais players
-    match = joinedMatch;
+    room = joinedRoomMatch;
+    match = joinedRoomMatch.match;
+    matchPlayers = joinedRoomMatch.players;
     notifyListeners();
   }
 

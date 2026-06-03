@@ -22,18 +22,14 @@ class MatchLayout extends StatefulWidget {
 
 class _MatchLayoutState extends State<MatchLayout> {
   void _handleExitMatch(BuildContext context) {
-    Navigator.of(context).pushReplacementNamed('/home');
+    Navigator.of(context).pushNamedAndRemoveUntil('/home', (_) => false);
 
     // TODO: emitir evento de quit match (sem cancelar partida...)
   }
 
-  void _renderMatchStepTimeline () {
+  void _renderMatchStepTimeline() {}
 
-  }
-
-  void _renderMatchSettingsBottomSheet(BuildContext context) {
-
-  }
+  void _renderMatchSettingsBottomSheet(BuildContext context) {}
 
   void _renderConfirmMatchExit(BuildContext context) {
     showDialog(
@@ -44,7 +40,32 @@ class _MatchLayoutState extends State<MatchLayout> {
             content: "Deseja realmente sair da partida?",
             variant: ThemedTextVariant.danger,
           ),
+          actionsAlignment: MainAxisAlignment.center,
+
           actions: [
+            Container(
+              margin: EdgeInsets.only(bottom: 10),
+              child: ElevatedButton(
+                onPressed: () => Navigator.of(context).pop(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ThemeColors.surfaceAlt,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadiusGeometry.circular(12),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 4,
+                  children: [
+                    ThemedText(
+                      content: "Cancelar",
+                      variant: ThemedTextVariant.muted,
+                    ),
+                    Icon(Icons.cancel),
+                  ],
+                ),
+              ),
+            ),
             ElevatedButton(
               onPressed: () => _handleExitMatch(context),
               style: ElevatedButton.styleFrom(
@@ -65,26 +86,6 @@ class _MatchLayoutState extends State<MatchLayout> {
                 ],
               ),
             ),
-            ElevatedButton(
-              onPressed: () => _handleExitMatch(context),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ThemeColors.surfaceAlt,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusGeometry.circular(12),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 4,
-                children: [
-                  ThemedText(
-                    content: "Cancelar",
-                    variant: ThemedTextVariant.muted,
-                  ),
-                  Icon(Icons.cancel),
-                ],
-              ),
-            ),
           ],
         );
       },
@@ -99,30 +100,23 @@ class _MatchLayoutState extends State<MatchLayout> {
         elevation: 0,
         centerTitle: true,
         backgroundColor: ThemeColors.background,
-        title: Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_back, color: ThemeColors.zinc200),
-                  tooltip: 'Sair',
-                  onPressed: () => _renderConfirmMatchExit(context),
-                ),
-                ThemedText(
-                  content: widget.appBarTitle, 
-                  variant: ThemedTextVariant.voting,
-                  textAlign: TextAlign.center,
-                  fontSize: 28,
-                ),
-                if (widget.renderMatchSettings != null && widget.renderMatchSettings == true) 
-                  IconButton(
-                    onPressed: () => _renderMatchSettingsBottomSheet(context),
-                    icon: Icon(Icons.settings),
-                  )
-              ],
-            ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => _renderConfirmMatchExit(context),
         ),
+        title: ThemedText(
+          content: widget.appBarTitle,
+          variant: ThemedTextVariant.voting,
+          textAlign: TextAlign.center,
+          fontSize: 28,
+        ),
+        actions: [
+          if (widget.renderMatchSettings == true)
+            IconButton(
+              onPressed: () => _renderMatchSettingsBottomSheet(context),
+              icon: Icon(Icons.settings),
+            ),
+        ],
       ),
       body: widget.child,
     );

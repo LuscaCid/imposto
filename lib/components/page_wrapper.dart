@@ -18,12 +18,14 @@ class PageWrapper extends StatelessWidget {
         height: double.infinity,
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            center: Alignment.topCenter,
+            center: Alignment.bottomCenter,
             radius: 1.4,
             colors: [
-              ThemeColors.primary600.withOpacity(0.15),
+              ThemeColors.primary600.withOpacity(0.45),
+              ThemeColors.primary600.withOpacity(0.25),
               ThemeColors.background,
             ],
+            stops: [0.0, 0.4, .8],
           ),
         ),
 

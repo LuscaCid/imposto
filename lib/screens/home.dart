@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                   if (index < roomsProvider.rooms.length) {
                     final room = roomsProvider.rooms[index];
                     return HomeMatchCard(
-                      match: room.match,
+                      room: room,
                       players: room.players,
                     );
                   }

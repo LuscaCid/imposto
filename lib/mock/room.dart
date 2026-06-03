@@ -7,6 +7,7 @@ final mockRooms = <Room>[
   Room(
     roomId: 'room-001',
     match: Match(
+      
       answerDuration: 50,
       votingDuration: 60,
       uuid: 'match-001',
@@ -15,7 +16,6 @@ final mockRooms = <Room>[
       hostPlayerId: 'user-001',
       status: MatchStatus.waiting,
       phase: MatchPhase.lobby,
-      playersCount: 5,
       maxPlayers: 10,
       minPlayers: 4,
       currentRound: 1,
@@ -28,26 +28,31 @@ final mockRooms = <Room>[
     ),
     players: [
       User(
+        isReady: true,
         uuid: 'user-001',
         username: 'Lucas',
         icon: 1,
       ),
       User(
+        isReady: true,
         uuid: 'user-002',
         username: 'João',
         icon: 3,
       ),
       User(
+        isReady: true,
         uuid: 'user-003',
         username: 'Maria',
         icon: 11,
       ),
       User(
+        isReady: true,
         uuid: 'user-004',
         username: 'Pedro',
         icon: 10,
       ),
       User(
+        isReady: false,
         uuid: 'user-005',
         username: 'Ana',
         icon: 12,
@@ -57,6 +62,7 @@ final mockRooms = <Room>[
       Message(
         content: 'Partiu jogar?',
         user: User(
+          isReady: true,
           uuid: 'user-001',
           username: 'Lucas',
           icon: 1,
@@ -66,6 +72,7 @@ final mockRooms = <Room>[
       Message(
         content: 'Bora!',
         user: User(
+          isReady: true,
           uuid: 'user-002',
           username: 'João',
           icon: 1,
@@ -78,6 +85,7 @@ final mockRooms = <Room>[
   Room(
     roomId: 'room-002',
     match: Match(
+      
       answerDuration: 50,
       votingDuration: 60,
       uuid: 'match-002',
@@ -86,7 +94,6 @@ final mockRooms = <Room>[
       hostPlayerId: 'user-006',
       status: MatchStatus.starting,
       phase: MatchPhase.reveal,
-      playersCount: 8,
       maxPlayers: 10,
       minPlayers: 4,
       currentRound: 1,
@@ -99,16 +106,19 @@ final mockRooms = <Room>[
     ),
     players: [
       User(
+        isReady: true,
         uuid: 'user-006',
         username: 'Gui',
         icon: 1,
       ),
       User(
+        isReady: true,
         uuid: 'user-007',
         username: 'Pedrin',
         icon: 1,
       ),
       User(
+        isReady: true,
         uuid: 'user-008',
         username: 'Perai',
         icon: 1,
@@ -118,6 +128,7 @@ final mockRooms = <Room>[
       Message(
         content: 'Todo mundo entrou?',
         user: User(
+          isReady: true,
           uuid: 'user-006',
           username: 'Gui',
           icon: 1,
@@ -130,6 +141,7 @@ final mockRooms = <Room>[
   Room(
     roomId: 'room-003',
     match: Match(
+      
       answerDuration: 50,
       votingDuration: 60,
       uuid: 'match-003',
@@ -138,7 +150,6 @@ final mockRooms = <Room>[
       hostPlayerId: 'user-009',
       status: MatchStatus.playing,
       phase: MatchPhase.discussion,
-      playersCount: 10,
       maxPlayers: 10,
       minPlayers: 5,
       currentRound: 2,
@@ -152,6 +163,7 @@ final mockRooms = <Room>[
     ),
     players: [
       User(
+        isReady: true,
         uuid: 'user-009',
         username: 'Magarreia',
         icon: 1,
@@ -163,6 +175,7 @@ final mockRooms = <Room>[
   Room(
     roomId: 'room-004',
     match: Match(
+      
       answerDuration: 50,
       votingDuration: 60,
       uuid: 'match-004',
@@ -171,7 +184,6 @@ final mockRooms = <Room>[
       hostPlayerId: 'user-010',
       status: MatchStatus.waiting,
       phase: MatchPhase.lobby,
-      playersCount: 3,
       maxPlayers: 8,
       minPlayers: 4,
       currentRound: 1,
@@ -189,6 +201,7 @@ final mockRooms = <Room>[
   Room(
     roomId: 'room-005',
     match: Match(
+      
       answerDuration: 50,
       votingDuration: 60,
       uuid: 'match-005',
@@ -197,7 +210,6 @@ final mockRooms = <Room>[
       hostPlayerId: 'user-011',
       status: MatchStatus.waiting,
       phase: MatchPhase.lobby,
-      playersCount: 6,
       maxPlayers: 12,
       minPlayers: 4,
       currentRound: 1,
@@ -215,6 +227,7 @@ final mockRooms = <Room>[
   Room(
     roomId: 'room-006',
     match: Match(
+      
       answerDuration: 50,
       votingDuration: 60,
       uuid: 'match-006',
@@ -223,7 +236,6 @@ final mockRooms = <Room>[
       hostPlayerId: 'user-012',
       status: MatchStatus.playing,
       phase: MatchPhase.voting,
-      playersCount: 9,
       maxPlayers: 10,
       minPlayers: 5,
       currentRound: 3,
@@ -242,6 +254,7 @@ final mockRooms = <Room>[
   Room(
     roomId: 'room-007',
     match: Match(
+      
       answerDuration: 50,
       votingDuration: 60,
       uuid: 'match-007',
@@ -250,7 +263,6 @@ final mockRooms = <Room>[
       hostPlayerId: 'user-013',
       status: MatchStatus.finished,
       phase: MatchPhase.result,
-      playersCount: 8,
       maxPlayers: 8,
       minPlayers: 4,
       currentRound: 5,
@@ -270,6 +282,7 @@ final mockRooms = <Room>[
   Room(
     roomId: 'room-008',
     match: Match(
+      
       answerDuration: 50,
       votingDuration: 60,
       uuid: 'match-008',
@@ -278,7 +291,6 @@ final mockRooms = <Room>[
       hostPlayerId: 'user-014',
       status: MatchStatus.waiting,
       phase: MatchPhase.lobby,
-      playersCount: 1,
       maxPlayers: 15,
       minPlayers: 4,
       currentRound: 1,
@@ -291,6 +303,7 @@ final mockRooms = <Room>[
     ),
     players: [
       User(
+        isReady: true,
         uuid: 'user-014',
         username: 'Host',
         icon: 1,

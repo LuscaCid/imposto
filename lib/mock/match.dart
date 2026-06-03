@@ -6,7 +6,6 @@ final List<Match> mockedMatches = [
     votingDuration: 60,
     uuid: '1',
     code: 'SPY847',
-    playersCount: 10,
     name: 'Sala Sombria',
     hostPlayerId: 'host_1',
 
@@ -33,7 +32,6 @@ final List<Match> mockedMatches = [
     votingDuration: 60,
     uuid: '2',
     code: 'DARK22',
-    playersCount: 4,
 
     name: 'Investigação Mortal',
     hostPlayerId: 'host_2',
@@ -63,7 +61,6 @@ final List<Match> mockedMatches = [
     votingDuration: 60,
     uuid: '3',
     code: 'VOID77',
-    playersCount: 4,
 
     name: 'Entre Traidores',
     hostPlayerId: 'host_3',
@@ -93,7 +90,6 @@ final List<Match> mockedMatches = [
     votingDuration: 60,
     uuid: '4',
     code: 'VOTE99',
-    playersCount: 4,
 
     name: 'Última Votação',
     hostPlayerId: 'host_4',
@@ -123,7 +119,6 @@ final List<Match> mockedMatches = [
     votingDuration: 60,
     uuid: '5',
     code: 'FINALX',
-    playersCount: 4,
 
     name: 'O Impostor Venceu',
     hostPlayerId: 'host_5',
